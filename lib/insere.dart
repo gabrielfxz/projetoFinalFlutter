@@ -67,7 +67,18 @@ class _InsereState extends State<Insere> {
         ],
       ),
           
-        ),); 
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xff03dac6),
+          foregroundColor: Colors.black,
+          onPressed: () {
+            Navigator.pop(
+              context
+            );
+            // Respond to button press
+          },
+          child: Icon(Icons.add),
+        ));
   }
   
 }
