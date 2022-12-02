@@ -8,7 +8,7 @@ class ctcData {
   Map toJson() => {'id': id, 'nome': nome, 'data': data};
 
   factory ctcData.fromJson(dynamic json) {
-    if (json['data'] == null) json['data'] = "01/01/2022 00:00:01";
+    if (json['data'] == null) json['data'] = "01/01/22 00:00:01";
     //if (json['log'] == null) json['log'] = '0';
 
     return ctcData(json['id'] as int, json['nome'] as String,
