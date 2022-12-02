@@ -40,6 +40,17 @@ class _ListaState extends State<Lista> {
     futureData = fetchData();
   }
 
+  delete(String id) async {
+    var res = http.delete(
+      Uri.parse('https://www.slmm.com.br/CTC/delete.php?id=${id}'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +75,18 @@ class _ListaState extends State<Lista> {
                                   children: [
                                     Text(data[index].nome),
                                     //Text(data[index].data),
-                                    Icon(Icons.bolt_rounded),
+                                    IconButton(
+                                      onPressed: () {
+                                        delete(data[index].id.toString());
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Lista()),
+                                        );
+                                      },
+                                      icon: Icon(Icons.delete),
+                                    ),
                                     IconButton(
                                       onPressed: () {
                                         Navigator.push(
@@ -74,7 +96,7 @@ class _ListaState extends State<Lista> {
                                                   const Detalhes()),
                                         );
                                       },
-                                      icon: Icon(Icons.favorite),
+                                      icon: Icon(Icons.edit),
                                     )
                                   ],
                                 )));
