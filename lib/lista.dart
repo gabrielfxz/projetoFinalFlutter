@@ -31,7 +31,7 @@ class Lista extends StatefulWidget {
 }
 
 class _ListaState extends State<Lista> {
-  // criar aqui
+  // criar a lista
   late Future<List<ctcData>> futureData;
 
   @override
@@ -41,6 +41,7 @@ class _ListaState extends State<Lista> {
   }
 
   delete(String id) async {
+    // remove aluno da api
     var res = http.delete(
       Uri.parse('https://www.slmm.com.br/CTC/delete.php?id=${id}'),
       headers: <String, String>{
@@ -73,10 +74,12 @@ class _ListaState extends State<Lista> {
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    // nome do aluno
                                     Text(data[index].nome),
-                                    //Text(data[index].data),
+                                    // botao para apagá-lo da api
                                     IconButton(
                                       onPressed: () {
+                                        // passa o id do aluno correspondente para função delete
                                         delete(data[index].id.toString());
                                         Navigator.push(
                                           context,
@@ -87,13 +90,18 @@ class _ListaState extends State<Lista> {
                                       },
                                       icon: Icon(Icons.delete),
                                     ),
+                                    // botao para mostrar os detalhes do aluno
                                     IconButton(
                                       onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const Detalhes()),
+                                              // passa o id correspondente ao aluno selecionado
+                                                  Detalhes(
+                                                      value: data[index]
+                                                          .id
+                                                          .toString())),
                                         );
                                       },
                                       icon: Icon(Icons.edit),
@@ -108,6 +116,7 @@ class _ListaState extends State<Lista> {
                 return CircularProgressIndicator();
               }),
         ),
+        // botao para pagina de inserir aluno
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
@@ -116,7 +125,6 @@ class _ListaState extends State<Lista> {
               context,
               MaterialPageRoute(builder: (context) => const Insere()),
             );
-            // Respond to button press
           },
           child: Icon(Icons.add),
         ));

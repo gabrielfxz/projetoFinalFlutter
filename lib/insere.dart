@@ -7,34 +7,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'lista.dart';
 
-// criar uma lista para puxar os dados da api
-// Future<List<ctcData>> fetchData() async {
-//   var response = await http.get(
-//       Uri.parse("https://www.slmm.com.br/CTC/insere.php"),
-//       headers: {"Accept": "application/json"});
-
-//   if (response.statusCode == 200) {
-//     // print(response.body);
-//     List jsonResponse = json.decode(response.body);
-//     return jsonResponse.map((data) => new ctcData.fromJson(data)).toList();
-//   } else {
-//     throw Exception('Erro inesperado....');
-//   }
-// }
-
-/*Future<http.Response> createAlbum(String nome, String data) {
-  return http.post(
-    Uri.parse('www.slmm.com.br/CTC/insere.php'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(<String, String>{
-      'nome': nome,
-      'data': data,
-    }),
-  );
-}*/
-
 class Insere extends StatefulWidget {
   const Insere({Key? key}) : super(key: key);
 
@@ -48,6 +20,7 @@ class _InsereState extends State<Insere> {
   var data = TextEditingController();
 
   insert() async {
+    // adiciona aluno à api
     var res = http.post(
       Uri.parse("https://www.slmm.com.br/CTC/insere.php"), 
       headers: <String, String>{
@@ -109,6 +82,7 @@ class _InsereState extends State<Insere> {
                     TextButton(
                       child: Text("insert products"),
                       onPressed: () {
+                        // executa função de inserir aluno
                         insert();
                         Navigator.push(
                           context,
@@ -122,15 +96,6 @@ class _InsereState extends State<Insere> {
               ),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xff03dac6),
-          foregroundColor: Colors.black,
-          onPressed: () {
-            Navigator.pop(context);
-            // Respond to button press
-          },
-          child: Icon(Icons.add),
-        ));
+        ),);
   }
 }

@@ -9,7 +9,6 @@ class ctcData {
 
   factory ctcData.fromJson(dynamic json) {
     if (json['data'] == null) json['data'] = "01/01/22 00:00:01";
-    //if (json['log'] == null) json['log'] = '0';
 
     return ctcData(json['id'] as int, json['nome'] as String,
         json['data'] as String);
